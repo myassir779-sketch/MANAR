@@ -1,0 +1,16 @@
+{
+  "name": "manar-translation-workspace",
+  "version": "0.2.0",
+  "private": true,
+  "description": "MANAR Language Studio: local-first translation and localization project workspace. Translation model not connected yet.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/**/*.test.mjs",
+    "check": "node --check src/app.js && node --check src/config/languages.js && node --check src/services/translation/translator.js && node --check src/services/storage/local-storage.js && node --check src/services/language-detection/detect-language.js && node --check src/services/model-loader/model-loader.js && node --check src/services/connectivity/connectivity.js && node --check src/utils/text.js",
+    "serve": "python server.py",
+    "test:server": "python -m unittest discover -s tests -p \"test_*.py\" -v"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

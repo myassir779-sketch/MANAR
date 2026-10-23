@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a2d">
+<meta name="description" content="MANAR Language Studio — workspace ya tafsiri, istilahi, miradi na ukaguzi wa ubora.">
+<title>MANAR — Language Studio</title>
+<link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Urambazaji mkuu">
+    <a class="brand" href="#" aria-label="MANAR mwanzo"><span class="brand-mark">م</span><span>MANAR<small>LANGUAGE STUDIO</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <button class="nav-item active" data-view="translator"><span>↔</span> Tafsiri</button>
+    <button class="nav-item" data-view="documents"><span>▧</span> Nyaraka & faili</button>
+    <button class="nav-item" data-view="projects"><span>▦</span> Miradi</button>
+    <button class="nav-item" data-view="translators"><span>♙</span> Tafsiri / waajiri</button>
+    <button class="nav-item" data-view="organizations"><span>▧</span> Mashirika</button>
+    <button class="nav-item" data-view="jobinbox"><span>⇩</span> Kazi zinazoingia</button>
+    <button class="nav-item" data-view="memory"><span>◫</span> Translation memory</button>
+    <button class="nav-item" data-view="dictionary"><span>▤</span> Istilahi / Glossary</button>
+    <button class="nav-item" data-view="quality"><span>✓</span> Ukaguzi wa ubora</button>
+    <button class="nav-item" data-view="subtitles"><span>▤</span> Subtitles</button>
+    <button class="nav-item" data-view="texttools"><span>⌘</span> Zana za maandishi</button>
+    <button class="nav-item" data-view="history"><span>◷</span> Historia</button>
+    <div class="sidebar-bottom">
+      <div class="privacy-card"><span class="privacy-icon">◇</span><strong>Faragha kwanza</strong><p>Data ya workspace huhifadhiwa kwenye kifaa hiki. Tafsiri halisi inahitaji injini iliyounganishwa na kuthibitishwa.</p></div>
+      <div class="nav-label">USIMAMIZI</div>
+      <button class="nav-item" data-view="admin"><span>▣</span> Admin / Usimamizi</button>
+      <button class="nav-item" data-view="settings"><span>⚙</span> Mipangilio</button>
+      <button class="nav-item" data-view="help"><span>ⓘ</span> Msaada & kuhusu</button>
+      <div class="version">LOCAL WORKSPACE <span>•</span> BUILD 2</div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow">YOUR MULTILINGUAL WORKSPACE</div><h1 id="page-title">Tafsiri</h1></div>
+      <div class="top-actions"><span class="status" id="system-status"><i></i> Local mode</span><button class="avatar" id="profile-button" aria-label="Wasifu wa ndani" title="Wasifu wa demo">M</button></div>
+    </header>
+
+    <section class="view" id="view-translator">
+      <div class="intro"><div><h2>Maneno yanaunganisha dunia.</h2><p>Workspace ya kisasa kwa tafsiri, timu na miradi ya lugha.</p></div><span class="intro-glyph" aria-hidden="true">文 <span>م</span></span></div>
+      <div class="translator-card">
+        <div class="language-bar">
+          <label class="language-field"><span>TOLEO LA CHANZO</span><select id="source-language" aria-label="Lugha ya chanzo"><option value="auto">Tambua lugha</option></select></label>
+          <button class="swap-button" id="swap-languages" aria-label="Badilisha lugha" title="Badilisha lugha">⇄</button>
+          <label class="language-field"><span>LUGHA LENGWA</span><select id="target-language" aria-label="Lugha lengwa"></select></label>
+        </div>
+        <div class="tool-strip">
+          <button class="tool-chip" id="detect-language">◎ Tambua lugha</button>
+          <button class="tool-chip" id="format-text">¶ Panga maandishi</button>
+          <button class="tool-chip" id="download-txt">↓ Pakua .txt</button>
+          <label class="tool-chip file-pick">↑ Ingiza faili<input type="file" id="quick-file" accept=".txt,.md,.csv,.json,.srt,.vtt,.html,.xml"></label>
+          <span class="tool-spacer"></span><span id="char-count">0 herufi</span>
+        </div>
+        <div class="translation-columns">
+          <section class="text-panel"><div class="panel-heading"><span>Maandishi ya chanzo</span><span id="word-count">0 maneno</span></div><textarea id="source-text" maxlength="50000" placeholder="Andika au bandika maandishi hapa…" spellcheck="true"></textarea><div class="panel-footer"><button class="text-action" id="clear-text">Futa</button><button class="text-action" id="source-smaller" aria-label="Punguza maandishi">A−</button><button class="text-action" id="source-larger" aria-label="Panua maandishi">A+</button><span class="output-note" id="source-meta">Limit 50,000 characters</span></div></section>
+          <section class="text-panel output-panel"><div class="panel-heading"><span>Matokeo ya tafsiri</span><span class="draft-label" id="engine-label">INJINI HAJAUNGANISHWA</span></div><div id="translation-output" class="output-text" aria-live="polite">Matokeo yataonekana hapa baada ya kuunganishwa kwa injini halisi ya tafsiri.</div><textarea id="editable-output" class="editable-output hidden" aria-label="Hariri matokeo" placeholder="Matokeo ya tafsiri au maandishi yaliyohaririwa…"></textarea><div class="panel-footer"><span class="output-note" id="output-note">Hakuna tafsiri iliyotengenezwa.</span><button class="text-action" id="edit-output">Hariri matokeo</button><button class="text-action" id="copy-output">Nakili</button></div></section>
+        </div>
+        <div class="translate-footer"><div class="engine-note"><span class="engine-dot"></span><span><strong>Translation engine</strong><small>Haijaunganishwa — hakuna matokeo ya kubuni</small></span></div><button class="primary-button" id="translate-button">✦ Tafsiri maandishi <span class="button-arrow">→</span></button></div>
+        <p class="notice" id="status-message" role="status">MANAR inafanya kazi kwenye kifaa hiki. Zana za maandishi zinapatikana; tafsiri ya mashine itawashwa baada ya modeli halisi kuthibitishwa.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-icon purple">◫</span><div><h3>Translation memory</h3><p>Hifadhi jozi za sentensi zilizokubaliwa na uzitumie tena.</p><button class="inline-link" data-go="memory">Fungua memory →</button></div></article>
+        <article class="feature-card"><span class="feature-icon gold">✓</span><div><h3>Quality assurance</h3><p>Kagua placeholders, namba, tagi na istilahi kabla ya kupeleka.</p><button class="inline-link" data-go="quality">Kagua maandishi →</button></div></article>
+        <article class="feature-card"><span class="feature-icon green">▦</span><div><h3>Miradi & timu</h3><p>Panga kazi, lugha, tarehe na hatua za miradi.</p><button class="inline-link" data-go="projects">Simamia miradi →</button></div></article>
+      </div>
+    </section>
+
+    <section class="view hidden" id="view-documents">
+      <div class="section-heading"><div><h2>Nyaraka & faili</h2><p>Ingiza maandishi ya kawaida na miundo ya maandishi inayotambulika kwenye browser.</p></div></div>
+      <div class="settings-card"><div class="upload-zone"><div class="upload-symbol">↑</div><h3>Dondosha faili au chagua kutoka kifaa</h3><p>Inasaidia .txt, .md, .csv, .json, .srt, .vtt, .html na .xml. PDF/DOCX bado hazijawezeshwa.</p><label class="primary-button file-pick">Chagua faili<input id="document-file" type="file" accept=".txt,.md,.csv,.json,.srt,.vtt,.html,.xml"></label><div id="file-feedback" class="muted small"></div></div><div class="two-col"><div><h3>Maandishi yaliyoingizwa</h3><textarea id="document-preview" class="wide-textarea" placeholder="Maudhui ya faili yataonekana hapa…" aria-label="Maudhui ya faili"></textarea></div><div><h3>Vitendo</h3><p class="muted">Unaweza kupeleka maandishi kwenye translator, kuyapakua kama TXT, au kuyagawa kwa vipande vya sentensi.</p><div class="button-row"><button class="secondary-button" id="send-doc-to-translator">Tumia kwenye translator</button><button class="secondary-button" id="download-doc">Pakua TXT</button><button class="secondary-button" id="segment-doc">Gawa sentensi</button></div><div id="segment-output" class="segment-list"></div></div></div></div>
+    </section>
+
+    <section class="view hidden" id="view-projects">
+      <div class="section-heading"><div><h2>Miradi ya tafsiri</h2><p>Unda miradi, fuatilia hali na simamia kazi zako kwenye kifaa hiki.</p></div><button class="primary-button" id="new-project">+ Mradi mpya</button></div>
+      <div class="stats-grid"><div class="stat-card"><span>Miradi yote</span><strong id="project-total">0</strong></div><div class="stat-card"><span>Inaendelea</span><strong id="project-active">0</strong></div><div class="stat-card"><span>Imekamilika</span><strong id="project-done">0</strong></div><div class="stat-card"><span>Jumla ya kazi</span><strong id="project-tasks">0</strong></div></div>
+      <div class="settings-card"><div class="table-toolbar"><input id="project-search" placeholder="Tafuta mradi…" aria-label="Tafuta mradi"><select id="project-filter" aria-label="Chuja hali"><option value="all">Hali zote</option><option value="Planning">Inapangwa</option><option value="In progress">Inaendelea</option><option value="Review">Mapitio</option><option value="Completed">Imekamilika</option></select></div><div id="project-list" class="project-list"></div></div>
+    </section>
+
+    <section class="view hidden" id="view-translators">
+      <div class="section-heading"><div><h2>Watafsiri na waajiri</h2><p>Jisajili kama mtafsiri, au tafuta watafsiri kwa lugha yao ya asili, jozi za lugha na utaalamu.</p></div><button class="primary-button" id="new-translator-profile">+ Sajili mtafsiri</button></div>
+      <div class="stats-grid"><div class="stat-card"><span>Wasifu wote</span><strong id="translator-total">0</strong></div><div class="stat-card"><span>Native / lugha ya asili</span><strong id="translator-native">0</strong></div><div class="stat-card"><span>Wapo tayari</span><strong id="translator-available">0</strong></div><div class="stat-card"><span>Jozi za lugha</span><strong id="translator-pairs">0</strong></div></div>
+      <div class="settings-card"><form id="translator-form" class="people-form"><input type="hidden" id="translator-id"><label>Jina kamili<input id="translator-name" required maxlength="100" placeholder="Jina la mtafsiri"></label><label>Barua pepe / mawasiliano<input id="translator-contact" required maxlength="160" placeholder="Email au mawasiliano ya kazi"></label><label>Lugha ya asili (native)<select id="translator-native-language" required></select></label><label>Lugha nyingine<input id="translator-other-languages" required maxlength="200" placeholder="Mf. English, Arabic"></label><label>Utaalamu<select id="translator-specialty"><option>General</option><option>Legal</option><option>Medical</option><option>Technical</option><option>Marketing</option><option>Education</option><option>Localization</option><option>Subtitling</option></select></label><label>Uzoefu<select id="translator-experience"><option>Beginner</option><option>Intermediate</option><option>Experienced</option><option>Expert</option></select></label><label>Hali<select id="translator-availability"><option>Available</option><option>Busy</option><option>Unavailable</option></select></label><label>Wasifu / ushahidi wa kazi<textarea id="translator-bio" maxlength="600" rows="2" placeholder="Uzoefu, vyeti, samples (usiweke data nyeti)"></textarea></label><div class="form-wide form-actions"><button class="secondary-button" type="button" id="cancel-translator-edit">Futa fomu</button><button class="primary-button" type="submit">Hifadhi wasifu</button></div></form><div class="table-toolbar"><input id="translator-search" placeholder="Tafuta jina, lugha au utaalamu…" aria-label="Tafuta watafsiri"><select id="translator-filter" aria-label="Chuja upatikanaji"><option value="all">Hali zote</option><option>Available</option><option>Busy</option><option>Unavailable</option></select></div><div id="translator-list" class="people-list"></div><p class="notice">Faragha: hii ni rejista ya ndani ya browser. Usichapishe taarifa za mawasiliano hadharani. Hakuna akaunti, uhakiki wa utambulisho au mfumo wa malipo uliounganishwa.</p></div>
+    </section>
+
+    <section class="view hidden" id="view-organizations">
+      <div class="section-heading"><div><h2>Mashirika na wateja</h2><p>Rejista ya mashirika, kampuni, NGOs, taasisi za elimu na wateja wanaohitaji huduma za lugha.</p></div></div>
+      <div class="settings-card"><form id="organization-form" class="people-form"><input type="hidden" id="organization-id"><label>Jina la shirika<input id="organization-name" required maxlength="140" placeholder="Jina la kampuni / NGO"></label><label>Aina<select id="organization-type"><option>Company</option><option>NGO</option><option>Government</option><option>Education</option><option>Healthcare</option><option>Publisher</option><option>Individual</option><option>Other</option></select></label><label>Mtu wa mawasiliano<input id="organization-contact" maxlength="100" placeholder="Jina la mtu (hiari)"></label><label>Email / simu<input id="organization-email" required maxlength="160" placeholder="Mawasiliano ya kazi"></label><label>Nchi / eneo<input id="organization-country" maxlength="100" placeholder="Mf. Tanzania"></label><label>Huduma zinazohitajika<input id="organization-services" maxlength="220" placeholder="Tafsiri, subtitles, localization…"></label><label class="form-wide">Maelezo<textarea id="organization-notes" maxlength="600" rows="2" placeholder="Maelezo ya ziada"></textarea></label><div class="form-wide form-actions"><button class="secondary-button" type="button" id="cancel-organization-edit">Futa fomu</button><button class="primary-button" type="submit">Hifadhi shirika</button></div></form><div class="table-toolbar"><input id="organization-search" placeholder="Tafuta mashirika…" aria-label="Tafuta mashirika"><button class="secondary-button" id="export-organizations">Hamisha CSV</button></div><div id="organization-list" class="people-list"></div></div>
+    </section>
+
+    <section class="view hidden" id="view-jobinbox">
+      <div class="section-heading"><div><h2>Kazi zinazoingia — Admin</h2><p>Mapokezi ya maombi ya kazi za tafsiri. Admin anaweza kukagua, kukubali, kukataa au kuunganisha kazi na mradi uliopo.</p></div><button class="secondary-button" id="export-jobs">Hamisha kazi CSV</button></div>
+      <div class="stats-grid"><div class="stat-card"><span>Kazi zote</span><strong id="job-total">0</strong></div><div class="stat-card"><span>Inasubiri</span><strong id="job-pending">0</strong></div><div class="stat-card"><span>Zimekubaliwa</span><strong id="job-accepted">0</strong></div><div class="stat-card"><span>Zimekamilika</span><strong id="job-completed">0</strong></div></div>
+      <div class="settings-card"><div class="notice">Hapa ni inbox ya ndani ya browser hii tu. Kwa kupokea kazi kutoka kwa mashirika kwenye internet, inahitajika backend salama, database na authentication.</div><form id="job-form" class="people-form"><input type="hidden" id="job-id"><label>Shirika / mteja<select id="job-organization"><option value="">Mteja mpya / hajatajwa</option></select></label><label>Jina la mteja<input id="job-client" required maxlength="140" placeholder="Shirika au jina la mteja"></label><label>Email ya mawasiliano<input id="job-contact" required maxlength="160" placeholder="Email ya kazi"></label><label>Kichwa cha kazi<input id="job-title" required maxlength="160" placeholder="Mf. Tafsiri ya tovuti"></label><label>Lugha ya chanzo<select id="job-source-language" required></select></label><label>Lugha lengwa<select id="job-target-language" required></select></label><label>Aina ya kazi<select id="job-type"><option>Document translation</option><option>Website localization</option><option>Subtitling</option><option>Proofreading</option><option>Interpretation</option><option>Transcription</option><option>Terminology</option><option>Other</option></select></label><label>Makadirio ya maneno<input id="job-words" type="number" min="0" max="100000000" value="0"></label><label>Tarehe ya mwisho<input id="job-deadline" type="date"></label><label>Hali ya kazi<select id="job-status"><option>Pending review</option><option>Accepted</option><option>Assigned</option><option>In progress</option><option>Review</option><option>Completed</option><option>Rejected</option></select></label><label class="form-wide">Maelezo ya kazi<textarea id="job-description" maxlength="1500" rows="3" placeholder="Maelekezo, muundo wa faili, muktadha na mahitaji"></textarea></label><div class="form-wide form-actions"><button class="secondary-button" type="button" id="cancel-job-edit">Futa fomu</button><button class="primary-button" type="submit">Pokea / hifadhi kazi</button></div></form><div class="table-toolbar"><input id="job-search" placeholder="Tafuta kazi, mteja au lugha…" aria-label="Tafuta kazi"><select id="job-filter" aria-label="Chuja hali ya kazi"><option value="all">Hali zote</option><option>Pending review</option><option>Accepted</option><option>Assigned</option><option>In progress</option><option>Review</option><option>Completed</option><option>Rejected</option></select></div><div id="job-list" class="people-list"></div></div>
+    </section>
+
+    <section class="view hidden" id="view-memory">
+      <div class="section-heading"><div><h2>Translation memory</h2><p>Hifadhi sentensi za chanzo na tafsiri zilizokaguliwa. Data ni ya ndani.</p></div><button class="secondary-button" id="export-memory">Hamisha JSON</button></div>
+      <div class="settings-card"><form id="memory-form" class="glossary-form"><label>Chanzo<input id="memory-source" required maxlength="2000" placeholder="Source segment"></label><label>Tafsiri iliyokubaliwa<input id="memory-target" required maxlength="2000" placeholder="Approved translation"></label><label>Lugha<input id="memory-pair" value="en → sw" maxlength="40"></label><button class="primary-button" type="submit">Hifadhi +</button></form><div class="table-toolbar"><input id="memory-search" placeholder="Tafuta source au translation…" aria-label="Tafuta translation memory"></div><div id="memory-list" class="glossary-list"></div><div class="button-row"><label class="secondary-button file-pick">Ingiza TM JSON<input type="file" id="import-memory" accept=".json"></label><button class="danger-button" id="clear-memory">Futa memory yote</button></div></div>
+    </section>
+
+    <section class="view hidden" id="view-dictionary">
+      <div class="section-heading"><div><h2>Istilahi / Glossary</h2><p>Maneno maalumu, maana zinazopendelewa na muktadha wa matumizi.</p></div><button class="secondary-button" id="export-glossary">Hamisha CSV</button></div>
+      <div class="settings-card"><form id="glossary-form" class="glossary-form"><label>Istilahi<input id="glossary-term" maxlength="120" required placeholder="Mf. community health"></label><label>Maana / tafsiri inayopendelewa<input id="glossary-meaning" maxlength="240" required placeholder="Tafsiri unayopendelea"></label><label>Muktadha<input id="glossary-context" maxlength="160" placeholder="Mf. afya, sheria…"></label><button class="primary-button" type="submit">Ongeza +</button></form><div class="table-toolbar"><input id="glossary-search" placeholder="Tafuta istilahi…" aria-label="Tafuta istilahi"></div><div id="glossary-list" class="glossary-list"></div></div>
+    </section>
+
+    <section class="view hidden" id="view-quality">
+      <div class="section-heading"><div><h2>Ukaguzi wa ubora (QA)</h2><p>Ukaguzi wa kikanuni wa maandishi. Huu si uthibitisho wa maana au ufasaha wa tafsiri.</p></div><button class="primary-button" id="run-qa">Endesha ukaguzi</button></div>
+      <div class="settings-card"><div class="two-col"><div><label class="field-label">Maandishi ya chanzo<textarea id="qa-source" class="wide-textarea" placeholder="Bandika maandishi ya chanzo…"></textarea></label></div><div><label class="field-label">Tafsiri ya kukagua<textarea id="qa-target" class="wide-textarea" placeholder="Bandika tafsiri…"></textarea></label></div></div><div class="check-options"><label><input type="checkbox" id="qa-numbers" checked> Linganisha namba</label><label><input type="checkbox" id="qa-placeholders" checked> Linganisha placeholders</label><label><input type="checkbox" id="qa-tags" checked> Kagua tagi za HTML</label><label><input type="checkbox" id="qa-length"> Tahadhari ya tofauti ya urefu</label></div><div id="qa-results" class="qa-results empty-state">Weka maandishi na bonyeza “Endesha ukaguzi”.</div></div>
+    </section>
+
+    <section class="view hidden" id="view-subtitles">
+      <div class="section-heading"><div><h2>Zana za subtitles</h2><p>Angalia muundo wa SRT/VTT, hesabu muda na pakua matokeo. Tafsiri ya subtitles bado inahitaji injini.</p></div></div>
+      <div class="settings-card"><label class="field-label">Bandika subtitle (SRT au VTT)<textarea id="subtitle-input" class="wide-textarea tall" placeholder="1&#10;00:00:01,000 --> 00:00:03,000&#10;Hello world!"></textarea></label><div class="button-row"><button class="primary-button" id="validate-subtitles">Kagua muundo</button><button class="secondary-button" id="download-subtitles">Pakua .srt</button><button class="secondary-button" id="clean-subtitles">Safisha namba/nafasi</button></div><div id="subtitle-results" class="qa-results empty-state">Matokeo ya ukaguzi yataonekana hapa.</div></div>
+    </section>
+
+    <section class="view hidden" id="view-texttools">
+      <div class="section-heading"><div><h2>Zana za maandishi</h2><p>Vifaa vya haraka vinavyofanya kazi bila API ya nje.</p></div></div>
+      <div class="settings-card"><label class="field-label">Maandishi<textarea id="utility-input" class="wide-textarea tall" placeholder="Bandika maandishi yako hapa…"></textarea></label><div class="tool-grid"><button class="secondary-button" data-textop="uppercase">HERUFI KUBWA</button><button class="secondary-button" data-textop="lowercase">herufi ndogo</button><button class="secondary-button" data-textop="titlecase">Title Case</button><button class="secondary-button" data-textop="trim">Ondoa nafasi za ziada</button><button class="secondary-button" data-textop="dedupe">Ondoa mistari inayojirudia</button><button class="secondary-button" data-textop="sort">Panga mistari A–Z</button><button class="secondary-button" data-textop="sentences">Gawa sentensi</button><button class="secondary-button" data-textop="wordcount">Hesabu maneno</button><button class="secondary-button" data-textop="reverse">Geuza mpangilio wa mistari</button><button class="secondary-button" data-textop="download">Pakua maandishi</button></div><div id="utility-result" class="tool-result" aria-live="polite">Chagua zana ili kuona matokeo.</div><button class="secondary-button" id="use-utility-result">Tumia matokeo kama chanzo cha tafsiri</button></div>
+    </section>
+
+    <section class="view hidden" id="view-history">
+      <div class="section-heading"><div><h2>Historia ya kazi</h2><p>Historia ya matukio na maandishi huhifadhiwa ndani ya kifaa hiki tu.</p></div><button class="danger-button" id="clear-history">Futa historia</button></div>
+      <div class="settings-card"><label class="toggle-row"><span><strong>Hifadhi historia ya workspace</strong><small>Hifadhi matukio na matokeo ya zana kwenye browser hii.</small></span><input type="checkbox" id="history-enabled"></label><div id="history-list" class="timeline empty-state">Historia imezimwa.</div></div>
+    </section>
+
+    <section class="view hidden" id="view-admin">
+      <div class="section-heading"><div><h2>Admin console</h2><p>Usimamizi wa ndani wa miradi na mipangilio ya MANAR. Hii si login ya server.</p></div><span class="pill warning">LOCAL DEMO — SI SALAMA KWA PRODUCTION</span></div>
+      <div class="stats-grid"><div class="stat-card"><span>Kazi zinazosubiri</span><strong id="admin-pending-jobs">0</strong></div><div class="stat-card"><span>Watafsiri</span><strong id="admin-translators">0</strong></div><div class="stat-card"><span>Mashirika</span><strong id="admin-organizations">0</strong></div><div class="stat-card"><span>Miradi</span><strong id="admin-projects">0</strong></div><div class="stat-card"><span>Istilahi</span><strong id="admin-terms">0</strong></div><div class="stat-card"><span>Memory entries</span><strong id="admin-memory">0</strong></div><div class="stat-card"><span>Matukio</span><strong id="admin-events">0</strong></div></div>
+      <div class="admin-grid"><div class="settings-card"><h3>Uendeshaji wa miradi</h3><p class="muted">Tengeneza mradi mpya, badili hali, au export taarifa kwa timu.</p><div class="button-row"><button class="primary-button" id="admin-new-project">+ Tengeneza mradi</button><button class="secondary-button" id="admin-export-data">Export data yote</button><label class="secondary-button file-pick">Import backup<input id="import-backup" type="file" accept=".json"></label></div></div><div class="settings-card"><h3>Hali ya mfumo</h3><div class="health-row"><span>Translation engine</span><span class="pill warning">Haijaunganishwa</span></div><div class="health-row"><span>Storage</span><span class="pill success">Local browser</span></div><div class="health-row"><span>Backend / accounts</span><span class="pill warning">Haipo</span></div><div class="health-row"><span>Paid services</span><span class="pill success">Hazijawashwa</span></div></div></div>
+      <div class="settings-card admin-settings"><h3>Usimamizi wa lugha</h3><p class="muted">Lugha zinazoonekana ni chaguo la UI tu; usaidizi wa tafsiri haujaidhinishwa mpaka modeli ijaribiwe.</p><div id="admin-language-list" class="language-check-list"></div></div>
+      <div class="settings-card admin-settings"><div class="section-heading compact"><div><h3>Audit log ya ndani</h3><p>Matukio ya hivi karibuni yaliyotokea kwenye browser hii.</p></div><button class="secondary-button" id="clear-audit">Futa audit log</button></div><div id="audit-list" class="timeline"></div></div>
+    </section>
+
+    <section class="view hidden" id="view-settings">
+      <div class="section-heading"><div><h2>Mipangilio & faragha</h2><p>Dhibiti namna workspace hii inavyohifadhi data kwenye kifaa.</p></div></div>
+      <div class="settings-card"><label class="toggle-row"><span><strong>Hifadhi historia</strong><small>Hifadhi matukio kwenye local storage ya browser.</small></span><input type="checkbox" id="history-enabled-settings"></label><div class="setting-row"><span><strong>Ukubwa wa maandishi</strong><small>Rekebisha eneo la kuandika tafsiri.</small></span><div><button class="secondary-button" id="settings-smaller">A−</button> <button class="secondary-button" id="settings-larger">A+</button></div></div><div class="setting-row"><span><strong>Pakua backup</strong><small>Pakua miradi, memory, istilahi na mipangilio ya ndani.</small></span><button class="secondary-button" id="settings-export">Pakua backup</button></div><div class="setting-row"><span><strong>Futa data ya ndani</strong><small>Ondoa miradi, glossary, memory na historia kutoka browser hii.</small></span><button class="danger-button" id="clear-local-data">Futa data yote</button></div><p class="notice">Usiweke taarifa nyeti kwenye kifaa cha pamoja. Data ya local storage haijasimbwa na haishirikishwi na watumiaji wengine kiotomatiki.</p></div>
+    </section>
+
+    <section class="view hidden" id="view-help">
+      <div class="section-heading"><div><h2>Msaada & kuhusu MANAR</h2><p>Jukwaa la lugha linalojengwa hatua kwa hatua, bila huduma za kulipia kuwashwa.</p></div></div>
+      <div class="about-hero"><span class="brand-mark large">م</span><div><h3>MANAR Language Studio</h3><p>Muundo huu una workspace ya tafsiri, miradi, translation memory, glossary, QA, subtitle checks, text tools, history na admin console ya ndani.</p></div></div>
+      <div class="settings-card about-list"><h3>Vipengele vinavyofanya kazi sasa</h3><p>• Usimamizi wa miradi na hali yake • Translation memory ya ndani • Glossary • QA ya namba/placeholders/tagi • Zana za maandishi • Uingizaji wa faili za maandishi • Subtitle validation • Export/import backup • Audit log ya ndani.</p><h3>Bado havijatekelezwa</h3><p>Injini halisi ya tafsiri ya mashine/AI, akaunti salama za watumiaji, ushirikiano wa timu kwa wakati halisi, uchakataji wa PDF/DOCX, cloud sync na deployment ya public website. Hakuna matokeo ya tafsiri ya kubuni yanayotolewa.</p><h3>Jinsi ya kuendesha</h3><p>Fungua index.html kupitia local web server au tumia <code>npm run serve</code> baada ya kuongeza server script (kwa sasa tumia <code>npx serve .</code> ikiwa imewekwa). Data ya mfano huanza tupu na huhifadhiwa kwenye browser.</p><h3>Vyanzo vya muundo</h3><p>Vipengele vya CAT/TMS vimepangwa kwa kuzingatia translation memory, terminology, workflow, file formats na QA kama vipengele muhimu vya jukwaa la tafsiri. Hakuna mtoa huduma wa tafsiri wa nje aliyewashwa.</p></div>
+    </section>
+    <footer class="footer"><span>MANAR © <span id="year"></span></span><span>Local-first · No paid services enabled</span></footer>
+  </main>
+</div>
+<dialog id="project-dialog" class="project-dialog"><form id="project-form" method="dialog"><div class="dialog-head"><h2 id="project-dialog-title">Mradi mpya</h2><button type="button" class="icon-button" id="close-project-dialog" aria-label="Funga">×</button></div><input type="hidden" id="project-id"><label>Jina la mradi<input id="project-name" required maxlength="120" placeholder="Mf. Tovuti ya Kiswahili"></label><div class="two-col"><label>Lugha ya chanzo<select id="project-source"></select></label><label>Lugha lengwa<select id="project-target"></select></label></div><div class="two-col"><label>Hali<select id="project-status"><option>Planning</option><option>In progress</option><option>Review</option><option>Completed</option></select></label><label>Tarehe ya mwisho<input id="project-due" type="date"></label></div><label>Maelezo<textarea id="project-description" rows="3" maxlength="600" placeholder="Lengo, muktadha, au maelekezo"></textarea></label><label>Idadi ya kazi/segments<input id="project-task-count" type="number" min="0" max="1000000" value="0"></label><div class="dialog-actions"><button type="button" class="secondary-button" id="cancel-project">Ghairi</button><button type="submit" class="primary-button">Hifadhi mradi</button></div></form></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script type="module" src="src/app.js"></script>
+</body></html>

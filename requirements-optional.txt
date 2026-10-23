@@ -1,0 +1,4 @@
+# Optional local machine-translation engine; install only if desired.
+argostranslate>=1.9.0,<2.0
+
+# No extra Python package is required for the shared API: it uses the standard library.
